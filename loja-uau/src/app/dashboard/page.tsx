@@ -1,11 +1,12 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { Package, DollarSign, Users, AlertCircle, ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import Layout from "../components/Layout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Package, DollarSign, Users, AlertCircle, ArrowUpRight } from 'lucide-react';
 
 const salesData = [
   { name: 'Jan', vendas: 4000 },
@@ -14,24 +15,12 @@ const salesData = [
   { name: 'Abr', vendas: 4500 },
   { name: 'Mai', vendas: 6000 },
   { name: 'Jun', vendas: 5500 },
-]
+];
 
 export default function Dashboard() {
   return (
-    <div className="flex flex-col min-h-screen bg-purple-100 text-base">
-      <header className="sticky top-0 z-50 w-full border-b bg-purple-800 text-white">
-        <div className="container flex h-16 items-center justify-between">
-          <span className="text-2xl ml-4 font-bold">UAU Modas Dashboard</span>
-          <nav className="flex items-center space-x-4 text-sm font-medium">
-            <Button variant="ghost">Estoque</Button>
-            <Button variant="ghost">Vendas</Button>
-            <Button variant="ghost">Clientes</Button>
-            <Button variant="ghost">Relatórios</Button>
-          </nav>
-        </div>
-      </header>
-
-      <main className="flex-1 container py-6 px-4 max-w-full">
+    <Layout>
+      <main className="flex-1 container py-6 px-4 max-w-full bg-purple-100">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Card className="bg-purple-400 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -202,12 +191,6 @@ export default function Dashboard() {
           </Card>
         </div>
       </main>
-
-      <footer className="w-full py-4 border-t bg-purple-800 text-white">
-        <div className="container text-center text-sm">
-          © 2023 UAU Modas. Todos os direitos reservados.
-        </div>
-      </footer>
-    </div>
-  )
+    </Layout>
+  );
 }
