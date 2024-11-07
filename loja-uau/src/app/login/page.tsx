@@ -14,13 +14,34 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const router = useRouter()
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Aqui você implementaria a lógica de autenticação
-    console.log('Login attempt', { email, password })
-    // Após autenticação bem-sucedida, redirecione para o dashboard
-    //router.push('/dashboard')
-  }
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: email, password }),
+      });
+      
+      
+      if (!response.ok) {
+        throw new Error('Failed to login')
+      }
+
+      const data = await response.json()
+      console.log('Login successful', data)
+
+      // Redirecionar para o dashboard após login bem-sucedido
+      router.push('/dashboard')
+    }
+    catch (error) {
+      console.error('Failed to login', error)
+    }
+  };
+    
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-800 to-purple-400">
@@ -40,7 +61,6 @@ export default function LoginPage() {
               <Label htmlFor="email">Email</Label>
               <Input 
                 id="email" 
-                type="email" 
                 placeholder="seu@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
